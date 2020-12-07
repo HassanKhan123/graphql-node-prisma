@@ -5,12 +5,57 @@ const prisma = new Prisma({
   endpoint: 'http://localhost:4466/',
 });
 
-prisma.query.users(null, '{id name email posts {id title}}').then((data) => {
-  console.log(JSON.stringify(data, undefined, 2));
-});
+// prisma.query.users(null, '{id name email posts {id title}}').then((data) => {
+//   console.log(JSON.stringify(data, undefined, 2));
+// });
 
-prisma.query
-  .comments(null, '{id text author {name} post {title}}')
+// prisma.query
+//   .comments(null, '{id text author {name} post {title}}')
+//   .then((data) => {
+//     console.log(JSON.stringify(data, undefined, 2));
+//   });
+
+// prisma.query.posts(null, '{id title author {name}}').then((data) => {
+//   console.log(JSON.stringify(data, undefined, 2));
+// });
+
+// prisma.mutation
+//   .createPost(
+//     {
+//       data: {
+//         title: 'New Post',
+//         body: 'NEW POST BODY',
+//         published: true,
+//         author: {
+//           connect: {
+//             id: 'ckidwt5qm00150847dw9h2lti',
+//           },
+//         },
+//       },
+//     },
+//     '{title,body,published,author {name}}'
+//   )
+//   .then((data) => {
+//     console.log(JSON.stringify(data, undefined, 2));
+//   });
+
+prisma.mutation
+  .updatePost(
+    {
+      data: {
+        published: false,
+        body: 'UPDATED',
+      },
+      where: {
+        id: 'ckiev4w4a006e0847fa49zhg8',
+      },
+    },
+    '{title body published}'
+  )
   .then((data) => {
-    console.log(JSON.stringify(data, undefined, 2));
+    console.log(data);
+    return prisma.query.posts(null, '{title body published}');
+  })
+  .then((data) => {
+    console.log(data);
   });
