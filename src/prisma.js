@@ -61,6 +61,10 @@ const prisma = new Prisma({
 //   });
 
 // const createPostForUser = async (authorId, data) => {
+//   const userExits = await prisma.exists.User({
+//     id: authorId,
+//   });
+//   if (!userExits) throw new Error('User not found');
 //   const post = await prisma.mutation.createPost(
 //     {
 //       data: {
@@ -72,29 +76,29 @@ const prisma = new Prisma({
 //         },
 //       },
 //     },
-//     '{title body published}'
-//   );
-//   const author = await prisma.query.user(
-//     {
-//       where: {
-//         id: authorId,
-//       },
-//     },
-//     '{name posts {title body}}'
+//     '{author {name posts {title body}}}'
 //   );
 
-//   return author;
+//   return post;
 // };
 
 // createPostForUser('ckidwt5qm00150847dw9h2lti', {
 //   title: 'Testing',
-//   body: 'LALALALALLALA',
+//   body: 'AAAAAAAAAAAAAAAAAA',
 //   published: true,
-// }).then((user) => {
-//   console.log(JSON.stringify(user, undefined, 2));
-// });
+// })
+//   .then((user) => {
+//     console.log(JSON.stringify(user, undefined, 2));
+//   })
+//   .catch((err) => {
+//     console.log(err.message);
+//   });
 
 const updatePostForUser = async (postId, data) => {
+  const postExists = await prisma.exists.Post({
+    id: postId,
+  });
+  if (!postExists) throw new Error('Post not found');
   const post = await prisma.mutation.updatePost(
     {
       data,
@@ -102,22 +106,24 @@ const updatePostForUser = async (postId, data) => {
         id: postId,
       },
     },
-    '{author {id}}'
-  );
-  const author = await prisma.query.user(
-    {
-      where: {
-        id: post.author.id,
-      },
-    },
-    '{name posts {title body}}'
+    '{author {name posts {title body}}}'
   );
 
-  return author;
+  return post;
 };
 
 updatePostForUser('ckiev4w4a006e0847fa49zhg8', {
-  body: 'UPDATED AGAIN',
-}).then((user) => {
-  console.log(JSON.stringify(user, undefined, 2));
-});
+  body: 'UPDATED AGAIN 2.0',
+})
+  .then((user) => {
+    console.log(JSON.stringify(user, undefined, 2));
+  })
+  .catch((err) => console.log(err.message));
+
+// prisma.exists
+//   .Comment({
+//     id: 'ckidy5ebw00770847qaplrmeg',
+//   })
+//   .then((res) => {
+//     console.log(res);
+//   });
