@@ -65,19 +65,9 @@ const Query = {
     }
 
     return prisma.query.posts(opArgs, info);
-    // if (!args.query) return db.posts;
-    // return db.posts.filter((post) => {
-    //   const isTitleMatch = post.title
-    //     .toLowerCase()
-    //     .includes(args.query.toLowerCase());
-    //   const isBodyMatch = post.body
-    //     .toLowerCase()
-    //     .includes(args.query.toLowerCase());
-    //   return isTitleMatch || isBodyMatch;
-    // });
   },
-  comments(parent, args, { db }, info) {
-    return db.comments;
+  comments(parent, args, { prisma }, info) {
+    return prisma.query.comments(null, info);
   },
 };
 
