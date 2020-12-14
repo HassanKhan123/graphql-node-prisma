@@ -5,6 +5,8 @@ const prisma = new Prisma({
   endpoint: 'http://localhost:4466/',
 });
 
+export default prisma;
+
 // prisma.query.users(null, '{id name email posts {id title}}').then((data) => {
 //   console.log(JSON.stringify(data, undefined, 2));
 // });
@@ -94,31 +96,31 @@ const prisma = new Prisma({
 //     console.log(err.message);
 //   });
 
-const updatePostForUser = async (postId, data) => {
-  const postExists = await prisma.exists.Post({
-    id: postId,
-  });
-  if (!postExists) throw new Error('Post not found');
-  const post = await prisma.mutation.updatePost(
-    {
-      data,
-      where: {
-        id: postId,
-      },
-    },
-    '{author {name posts {title body}}}'
-  );
+// const updatePostForUser = async (postId, data) => {
+//   const postExists = await prisma.exists.Post({
+//     id: postId,
+//   });
+//   if (!postExists) throw new Error('Post not found');
+//   const post = await prisma.mutation.updatePost(
+//     {
+//       data,
+//       where: {
+//         id: postId,
+//       },
+//     },
+//     '{author {name posts {title body}}}'
+//   );
 
-  return post;
-};
+//   return post;
+// };
 
-updatePostForUser('ckiev4w4a006e0847fa49zhg8', {
-  body: 'UPDATED AGAIN 2.0',
-})
-  .then((user) => {
-    console.log(JSON.stringify(user, undefined, 2));
-  })
-  .catch((err) => console.log(err.message));
+// updatePostForUser('ckiev4w4a006e0847fa49zhg8', {
+//   body: 'UPDATED AGAIN 2.0',
+// })
+//   .then((user) => {
+//     console.log(JSON.stringify(user, undefined, 2));
+//   })
+//   .catch((err) => console.log(err.message));
 
 // prisma.exists
 //   .Comment({
