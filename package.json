@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon src/index.js --ext js,graphql --exec babel-node",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "get-schema": "graphql-codegen --config ./codegen.yml"
+    "get-schema": "get-graphql-schema http://localhost:4466 > src/generated/prisma.graphql -h \"Authorization\"=\"bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InNlcnZpY2UiOiJkZWZhdWx0QGRlZmF1bHQiLCJyb2xlcyI6WyJhZG1pbiJdfSwiaWF0IjoxNjA4MDE3NjE2LCJleHAiOjE2MDg2MjI0MTZ9.3MxMvgwyCSOIOjyvSahqV8LiCWrskn2lAkYtk0NtIL8\""
   },
   "author": "Hassan Khan",
   "license": "MIT",
