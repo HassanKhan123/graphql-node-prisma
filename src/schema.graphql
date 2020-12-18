@@ -3,10 +3,11 @@ type Query {
   sum(numbers: [Float!]!): Float!
   greeting(name: String): String!
   me: User!
-  post: Post!
+  post(id: ID!): Post!
   grades: [Int!]!
   users(query: String): [User!]!
   posts(query: String): [Post!]!
+  myPosts(query: String): [Post!]!
   comments: [Comment!]!
 }
 
