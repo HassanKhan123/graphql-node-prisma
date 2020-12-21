@@ -56,7 +56,10 @@ const Query = {
     return posts[0];
   },
   users(parent, args, { prisma }, info) {
-    const opArgs = {};
+    const opArgs = {
+      first: args.first,
+      skip: args.skip,
+    };
 
     if (args.query) {
       opArgs.where = {
@@ -75,6 +78,8 @@ const Query = {
       where: {
         published: true,
       },
+      first: args.first,
+      skip: args.skip,
     };
     if (args.query) {
       opArgs.where.OR = [
