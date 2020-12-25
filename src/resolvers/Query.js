@@ -60,6 +60,7 @@ const Query = {
       first: args.first,
       skip: args.skip,
       after: args.after,
+      orderBy: args.orderBy,
     };
 
     if (args.query) {
@@ -82,6 +83,7 @@ const Query = {
       first: args.first,
       skip: args.skip,
       after: args.after,
+      orderBy: args.orderBy,
     };
     if (args.query) {
       opArgs.where.OR = [
@@ -107,6 +109,7 @@ const Query = {
       first: args.first,
       skip: args.skip,
       after: args.after,
+      orderBy: args.orderBy,
     };
     if (args.query) {
       opArgs.where.OR = [
@@ -126,6 +129,7 @@ const Query = {
       first: args.first,
       skip: args.skip,
       after: args.after,
+      orderBy: args.orderBy,
     };
     return prisma.query.comments(opArgs, info);
   },
